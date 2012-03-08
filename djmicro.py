@@ -1,6 +1,7 @@
 import os
 
 _base_module = None
+__all__ = ["configure", "route", "run", "render", "redirect"]
 
 def configure(options={}, module=None):
     if not module:
@@ -39,3 +40,12 @@ def route(*args, **kwargs):
 def run():
     from django.core.management import execute_from_command_line
     execute_from_command_line()
+
+def render(*args, **kwargs):
+    from django.shortcuts import render as orig_render
+    return orig_render(*args, **kwargs)
+
+def redirect(*args, **kwargs):
+    from django.shortcuts import redirect as orig_redirect
+    return orig_redirect(*args, **kwargs)
+
